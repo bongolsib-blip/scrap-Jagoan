@@ -35,7 +35,7 @@ cookies = {
 }
 session.cookies.update(cookies)
 
-form_url = "https://panel.jagoanssh.com/account/create/38?protocol=vmess"
+form_url = "https://panel.jagoanssh.com/account/create/40?protocol=vmess"
 
 print("[DEBUG] Mengakses halaman form via CloudScraper...")
 res_get = session.get(form_url, headers=headers)
@@ -64,7 +64,7 @@ print(f'[+] Username baru: {username}')
 
 payload = {
     "_token": csrf_token,
-    "_server": "idray.jagoanip.my.id",
+    "_server": "sgray.jagoanip.my.id",
     "username": username,
     "duration": "trial",
     "protocol": "vmess"
@@ -112,12 +112,12 @@ clash_formatted = f"""proxies:
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: idray.jagoanip.my.id
+    servername: sgray.jagoanip.my.id
     network: ws
     ws-opts:
       path: /vvip
       headers:
-        Host: idray.jagoanip.my.id
+        Host: sgray.jagoanip.my.id
     udp: true
 """
 
