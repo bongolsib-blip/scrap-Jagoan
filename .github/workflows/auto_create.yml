@@ -1,0 +1,40 @@
+name: Auto Create JagoanSSH
+
+on:
+  schedule:
+    # Berjalan setiap hari di jam acak (misal menit ke-random pada pukul 00-05 UTC)
+    - cron: '35 2 * * *' 
+  workflow_dispatch: # Bisa dijalankan manual lewat tab Actions di GitHub
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install requests beautifulsoup4
+
+      - name: Run Automation Script
+        env:
+          REMEMBER_COOKIE: ${{ secrets.REMEMBER_COOKIE }}
+          CF_CLEARANCE: ${{ secrets.CF_CLEARANCE }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python main.py
+
+      - name: Commit and Push Proxy Result
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "action@github.com"
+          git add proxy.yaml
+          git commit -m "Auto-update proxy config: $(date +'%Y-%m-%d')" || exit 0
+          git push
