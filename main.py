@@ -36,8 +36,12 @@ if "login" in res_get.url.lower():
 
 soup = BeautifulSoup(res_get.text, 'html.parser')
 meta_token = soup.find('meta', {'name': 'csrf-token'})
+
 if not meta_token:
-    print("[LOG] Gagal menemukan meta csrf-token.")
+    print(f"[LOG] Gagal menemukan meta csrf-token.")
+    print(f"[DEBUG] URL terakhir setelah GET: {res_get.url}")
+    print(f"[DEBUG] Status Code GET: {res_get.status_code}")
+    print(f"[DEBUG] Cuplikan HTML dari Server:\n{res_get.text[:500]}") # Cetak 500 karakter pertama
     exit(1)
 
 csrf_token = meta_token['content']
