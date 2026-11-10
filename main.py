@@ -7,8 +7,6 @@ from bs4 import BeautifulSoup
 from urllib.parse import unquote
 import requests
 
-# Jeda waktu acak
-time.sleep(random.randint(60, 600))
 
 REMEMBER_COOKIE = os.getenv("REMEMBER_COOKIE")
 CF_CLEARANCE = os.getenv("CF_CLEARANCE")
