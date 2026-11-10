@@ -1,17 +1,27 @@
 import os
 import random
 import string
-import requests
+import time
+import cloudscraper  # Ganti requests dengan cloudscraper
 from bs4 import BeautifulSoup
 from urllib.parse import unquote
 
-# Ambil konfigurasi dari Environment Variables GitHub Actions
+# Jeda waktu acak
+time.sleep(random.randint(60, 600))
+
 REMEMBER_COOKIE = os.getenv("REMEMBER_COOKIE")
 CF_CLEARANCE = os.getenv("CF_CLEARANCE")
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
-session = requests.Session()
+# Gunakan cloudscraper session
+session = cloudscraper.create_scraper(
+    browser={
+        'browser': 'chrome',
+        'platform': 'android',
+        'desktop': False
+    }
+)
 
 cookies = {
     "remember_web_59ba36addc2b2f9401580f014c7f58ea4e30989d": REMEMBER_COOKIE,
@@ -19,13 +29,10 @@ cookies = {
 }
 session.cookies.update(cookies)
 
-headers = {
-    "User-Agent": "Mozilla/5.0 (Linux; Android 16; Pixel 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
-    "Origin": "https://panel.jagoanssh.com",
-    "Accept": "application/json, text/plain, */*"
-}
-
 form_url = "https://panel.jagoanssh.com/account/create/38?protocol=vmess"
+
+print("[DEBUG] Mengakses halaman form via CloudScraper...")
+res_get = session.get(form_url)
 
 print("[DEBUG] Mengakses halaman form...")
 res_get = session.get(form_url, headers=headers)
