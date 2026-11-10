@@ -105,7 +105,7 @@ if not uuid:
 
 clash_formatted = f"""proxies:
   - name: {username}
-    server: 104.17.2.81
+    server: 104.17.3.81
     port: 443
     type: vmess
     uuid: {uuid}
@@ -125,7 +125,7 @@ clash_formatted = f"""proxies:
 vmess_config = {
     "v": "2",
     "ps": username,
-    "add": "104.17.2.81",
+    "add": "104.17.3.81",
     "port": "443",
     "id": uuid,
     "aid": "0",
@@ -143,7 +143,7 @@ base64_str = base64.b64encode(json_str.encode('utf-8')).decode('utf-8')
 vmess_link_bug = f"vmess://{base64_str}"
 
 # Simpan ke file terpisah (misal: vmess_bug.txt)
-with open("vmess_bug.txt", "w") as f:
+with open("vmess_bug.yaml", "w") as f:
     f.write(vmess_link_bug)
 print("[LOG] File vmess_bug.txt berhasil dibuat.")
 
