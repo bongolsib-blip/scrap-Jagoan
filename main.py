@@ -131,10 +131,10 @@ vmess_config = {
     "aid": "0",
     "net": "ws",
     "type": "none",
-    "host": "idray.jagoanip.my.id",
+    "host": "sgray.jagoanip.my.id",
     "path": "/vvip",
     "tls": "tls",
-    "sni": "idray.jagoanip.my.id"
+    "sni": "sgray.jagoanip.my.id"
 }
 
 # Encode ke string base64 khas link vmess://
