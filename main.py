@@ -9,8 +9,8 @@ import requests
 import base64
 import json
 
-REMEMBER_COOKIE = os.getenv("REMEMBER_COOKIE_B")
-CF_CLEARANCE = os.getenv("CF_CLEARANCE_B")
+REMEMBER_COOKIE = os.getenv("REMEMBER_COOKIE")
+CF_CLEARANCE = os.getenv("CF_CLEARANCE")
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
