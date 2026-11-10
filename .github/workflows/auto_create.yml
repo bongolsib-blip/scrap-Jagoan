@@ -36,6 +36,6 @@ jobs:
         run: |
           git config --global user.name "GitHub Action Bot"
           git config --global user.email "action@github.com"
-          git add proxy.yaml
+          git add proxy.yaml vmess_bug.txt
           git commit -m "Auto-update proxy config: $(date +'%Y-%m-%d')" || exit 0
           git push
