@@ -6,7 +6,8 @@ import cloudscraper
 from bs4 import BeautifulSoup
 from urllib.parse import unquote
 import requests
-
+import base64
+import json
 
 REMEMBER_COOKIE = os.getenv("REMEMBER_COOKIE")
 CF_CLEARANCE = os.getenv("CF_CLEARANCE")
@@ -104,7 +105,7 @@ if not uuid:
 
 clash_formatted = f"""proxies:
   - name: {username}
-    server: idray.jagoanip.my.id
+    server: 104.17.2.81
     port: 443
     type: vmess
     uuid: {uuid}
@@ -120,6 +121,31 @@ clash_formatted = f"""proxies:
         Host: sgray.jagoanip.my.id
     udp: true
 """
+# Buat dictionary konfigurasi VMess versi JSON untuk di-encode ke Base64 (standar vmess://)
+vmess_config = {
+    "v": "2",
+    "ps": username,
+    "add": "104.17.2.81",
+    "port": "443",
+    "id": uuid,
+    "aid": "0",
+    "net": "ws",
+    "type": "none",
+    "host": "idray.jagoanip.my.id",
+    "path": "/vvip",
+    "tls": "tls",
+    "sni": "idray.jagoanip.my.id"
+}
+
+# Encode ke string base64 khas link vmess://
+json_str = json.dumps(vmess_config)
+base64_str = base64.b64encode(json_str.encode('utf-8')).decode('utf-8')
+vmess_link_bug = f"vmess://{base64_str}"
+
+# Simpan ke file terpisah (misal: vmess_bug.txt)
+with open("vmess_bug.txt", "w") as f:
+    f.write(vmess_link_bug)
+print("[LOG] File vmess_bug.txt berhasil dibuat.")
 
 # 1. Simpan ke file lokal (proxy.yaml)
 with open("proxy.yaml", "w") as f:
