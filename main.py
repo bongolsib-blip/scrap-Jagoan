@@ -2,9 +2,10 @@ import os
 import random
 import string
 import time
-import cloudscraper  # Ganti requests dengan cloudscraper
+import cloudscraper
 from bs4 import BeautifulSoup
 from urllib.parse import unquote
+import requests
 
 # Jeda waktu acak
 time.sleep(random.randint(60, 600))
@@ -13,6 +14,13 @@ REMEMBER_COOKIE = os.getenv("REMEMBER_COOKIE")
 CF_CLEARANCE = os.getenv("CF_CLEARANCE")
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+
+# Header persis seperti kode awalmu
+headers = {
+    "User-Agent": "Mozilla/5.0 (Linux; Android 16; Pixel 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+    "Origin": "https://panel.jagoanssh.com",
+    "Accept": "application/json, text/plain, */*"
+}
 
 # Gunakan cloudscraper session
 session = cloudscraper.create_scraper(
@@ -32,13 +40,10 @@ session.cookies.update(cookies)
 form_url = "https://panel.jagoanssh.com/account/create/38?protocol=vmess"
 
 print("[DEBUG] Mengakses halaman form via CloudScraper...")
-res_get = session.get(form_url)
-
-print("[DEBUG] Mengakses halaman form...")
 res_get = session.get(form_url, headers=headers)
 
 if "login" in res_get.url.lower():
-    print("[GAGAL] Sesi/Cookie kedaluwarsa.")
+    print("[GAGAL] Sesi/Cookie kedaluwarsa atau tertolak ke halaman login.")
     exit(1)
 
 soup = BeautifulSoup(res_get.text, 'html.parser')
@@ -48,7 +53,7 @@ if not meta_token:
     print(f"[LOG] Gagal menemukan meta csrf-token.")
     print(f"[DEBUG] URL terakhir setelah GET: {res_get.url}")
     print(f"[DEBUG] Status Code GET: {res_get.status_code}")
-    print(f"[DEBUG] Cuplikan HTML dari Server:\n{res_get.text[:500]}") # Cetak 500 karakter pertama
+    print(f"[DEBUG] Cuplikan HTML dari Server:\n{res_get.text[:500]}")
     exit(1)
 
 csrf_token = meta_token['content']
@@ -90,21 +95,21 @@ if response.status_code != 200:
 
 res_json = response.json()
 details = res_json.get("details", {})
-clash_raw = details.get("clash", "")
 vmess_tls = details.get("vmess_tls", "")
 expired_date = details.get("expired", "")
+uuid = details.get("uuid", "")
 
-if not clash_raw:
-    print("[GAGAL] Data Clash tidak ditemukan dalam respons.")
+if not uuid:
+    print("[GAGAL] Data UUID tidak ditemukan dalam respons.")
+    print(response.text)
     exit(1)
 
-# Format ulang teks Clash agar sesuai persis dengan struktur yang kamu inginkan
 clash_formatted = f"""proxies:
   - name: {username}
     server: idray.jagoanip.my.id
     port: 443
     type: vmess
-    uuid: {details.get("uuid")}
+    uuid: {uuid}
     alterId: 0
     cipher: auto
     tls: true
@@ -118,7 +123,7 @@ clash_formatted = f"""proxies:
     udp: true
 """
 
-# 1. Simpan ke file lokal (misal: proxy.yaml)
+# 1. Simpan ke file lokal (proxy.yaml)
 with open("proxy.yaml", "w") as f:
     f.write(clash_formatted)
 print("[LOG] File proxy.yaml berhasil dibuat.")
@@ -126,10 +131,10 @@ print("[LOG] File proxy.yaml berhasil dibuat.")
 # 2. Kirim pesan ke Telegram
 if TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID:
     telegram_message = (
-        f"✅ **Akun Vmess Berhasil Dibuat!**\n\n"
+        f"✅ *Akun Vmess Berhasil Dibuat!*\n\n"
         f"👤 Username: `{username}`\n"
         f"📅 Expired: `{expired_date}`\n\n"
-        f"🔗 **Link Vmess TLS:**\n`{vmess_tls}`\n\n"
+        f"🔗 *Link Vmess TLS:*\n`{vmess_tls}`\n\n"
         f"📂 Format Clash:\n```yaml\n{clash_formatted}\n```"
     )
     
