@@ -25,8 +25,8 @@ jobs:
 
       - name: Run Automation Script
         env:
-          REMEMBER_COOKIE: ${{ secrets.REMEMBER_COOKIE_B }}
-          CF_CLEARANCE: ${{ secrets.CF_CLEARANCE_B }}
+          REMEMBER_COOKIE: ${{ secrets.REMEMBER_COOKIE }}
+          CF_CLEARANCE: ${{ secrets.CF_CLEARANCE }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
