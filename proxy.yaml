@@ -1,9 +1,9 @@
 proxies:
-  - name: 42j9d3ps
+  - name: 6geq1eu5
     server: 104.17.3.81
     port: 443
     type: vmess
-    uuid: ee4f9b27-7235-4354-a96b-a5dbb1afd9da
+    uuid: e18b3ae9-1e17-4467-aaf6-c62a4d246acf
     alterId: 0
     cipher: auto
     tls: true
