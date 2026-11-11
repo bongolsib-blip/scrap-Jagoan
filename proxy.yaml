@@ -1,9 +1,9 @@
 proxies:
-  - name: 2g0r3xje
-    server: 104.17.2.81
+  - name: 42j9d3ps
+    server: 104.17.3.81
     port: 443
     type: vmess
-    uuid: 57195aa2-0e13-4ee5-8fac-c3d9f15e5d31
+    uuid: ee4f9b27-7235-4354-a96b-a5dbb1afd9da
     alterId: 0
     cipher: auto
     tls: true
