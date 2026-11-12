@@ -1,9 +1,9 @@
 proxies:
-  - name: 6geq1eu5
+  - name: bmdqls3l
     server: 104.17.3.81
     port: 443
     type: vmess
-    uuid: e18b3ae9-1e17-4467-aaf6-c62a4d246acf
+    uuid: 691f0d95-b5a0-4572-bf2f-5f60d03e886f
     alterId: 0
     cipher: auto
     tls: true
