@@ -1,0 +1,17 @@
+proxies:
+  - name: uiy0xd36
+    server: 104.17.3.81
+    port: 443
+    type: vmess
+    uuid: 2469ae1b-b372-4256-bf09-1a0bd53643e4
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sgray.jagoanip.my.id
+    network: ws
+    ws-opts:
+      path: /vvip
+      headers:
+        Host: sgray.jagoanip.my.id
+    udp: true
