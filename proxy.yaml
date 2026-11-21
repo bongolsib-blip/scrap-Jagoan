@@ -1,0 +1,17 @@
+proxies:
+  - name: j8lasbwv
+    server: 104.17.3.81
+    port: 443
+    type: vmess
+    uuid: d5fd00f2-fa9d-4a00-8587-6e755c8d246b
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sgray.jagoanip.my.id
+    network: ws
+    ws-opts:
+      path: /vvip
+      headers:
+        Host: sgray.jagoanip.my.id
+    udp: true
