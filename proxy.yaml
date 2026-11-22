@@ -1,9 +1,9 @@
 proxies:
-  - name: j8lasbwv
+  - name: 0wto7egd
     server: 104.17.3.81
     port: 443
     type: vmess
-    uuid: d5fd00f2-fa9d-4a00-8587-6e755c8d246b
+    uuid: 69fbe69a-c4a1-42b0-8963-875cda5e0e99
     alterId: 0
     cipher: auto
     tls: true
