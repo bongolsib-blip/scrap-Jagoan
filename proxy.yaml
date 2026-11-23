@@ -1,9 +1,9 @@
 proxies:
-  - name: 0wto7egd
+  - name: 6b7lqfdv
     server: 104.17.3.81
     port: 443
     type: vmess
-    uuid: 69fbe69a-c4a1-42b0-8963-875cda5e0e99
+    uuid: 7a8ff8bc-01ab-4b47-a7e7-099211275c37
     alterId: 0
     cipher: auto
     tls: true
