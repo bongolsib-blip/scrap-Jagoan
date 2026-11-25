@@ -1,9 +1,9 @@
 proxies:
-  - name: pz772wg9
+  - name: 3ihqfkr6
     server: 104.17.3.81
     port: 443
     type: vmess
-    uuid: e7a47f8f-a9e0-4756-8f5e-6c30c6719ac2
+    uuid: 58086dd9-62f7-4bda-bf52-f845bd00bee3
     alterId: 0
     cipher: auto
     tls: true
