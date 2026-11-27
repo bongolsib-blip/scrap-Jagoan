@@ -1,9 +1,9 @@
 proxies:
-  - name: 3ihqfkr6
+  - name: 8vy1kjzj
     server: 104.17.3.81
     port: 443
     type: vmess
-    uuid: 58086dd9-62f7-4bda-bf52-f845bd00bee3
+    uuid: 5bf57c26-66fd-4bf0-bf36-df8b631f0d52
     alterId: 0
     cipher: auto
     tls: true
