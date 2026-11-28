@@ -1,9 +1,9 @@
 proxies:
-  - name: 8vy1kjzj
+  - name: fi8osp7m
     server: 104.17.3.81
     port: 443
     type: vmess
-    uuid: 5bf57c26-66fd-4bf0-bf36-df8b631f0d52
+    uuid: d5a5fd0d-6b7e-462d-836f-f1d2a75b13e4
     alterId: 0
     cipher: auto
     tls: true
